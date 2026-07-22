@@ -1,0 +1,25 @@
+{
+  "name": "@nexode/errors",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared error system for the NeXoDe platform.",
+  "license": "UNLICENSED",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "test": "echo \"No tests yet\""
+  }
+}
