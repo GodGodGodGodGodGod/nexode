@@ -49,6 +49,12 @@ importers:
         specifier: ^8.65.0
         version: 8.65.0(eslint@9.39.5(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
 
+  packages/auth:
+    dependencies:
+      zod:
+        specifier: ^4.1.5
+        version: 4.4.3
+
   packages/config: {}
 
   packages/database: {}
