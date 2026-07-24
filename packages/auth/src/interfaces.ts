@@ -1,8 +1,12 @@
 import type {
   Session,
   UserIdentity,
-  AccessToken,
 } from './types.js';
+
+import type {
+  TokenPair,
+  VerifyTokenResult,
+} from './token.types.js';
 
 export interface AuthService {
   authenticate(
@@ -35,9 +39,13 @@ export interface SessionService {
 export interface TokenService {
   issue(
     user: UserIdentity
-  ): Promise<AccessToken>;
+  ): Promise<TokenPair>;
 
   verify(
     token: string
-  ): Promise<UserIdentity>;
+  ): Promise<VerifyTokenResult>;
+
+  refresh(
+    refreshToken: string
+  ): Promise<TokenPair>;
 }
