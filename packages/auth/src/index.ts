@@ -13,3 +13,4 @@ export * from './memory/memorySessionService.js';
 export * from './memory/memoryTokenService.js';
 export * from './token.registry.js';
 export * from './session.registry.js';
+export * from './providers/jwt/index.js';
