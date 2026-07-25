@@ -72,6 +72,8 @@ importers:
 
   packages/security: {}
 
+  packages/storage: {}
+
   packages/testing: {}
 
   packages/tsconfig: {}
