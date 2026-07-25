@@ -62,6 +62,8 @@ importers:
 
   packages/config: {}
 
+  packages/core: {}
+
   packages/database: {}
 
   packages/errors: {}
