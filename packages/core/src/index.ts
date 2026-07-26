@@ -8,3 +8,4 @@ export * from './registry.js';
 export * from './types.js';
 
 export * from './providers/default/index.js';
+export * from './services/index.js';
