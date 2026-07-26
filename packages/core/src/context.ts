@@ -1,11 +1,27 @@
-import {
-  getContainer,
-} from './container.js';
+import type {
+  ApplicationContext,
+} from './context/index.js';
 
-export function resolve<T>(
-  token: string,
-): T {
-  return getContainer().resolve<T>(
-    token,
-  );
+
+let currentContext:
+  ApplicationContext | undefined;
+
+
+export function setContext(
+  context: ApplicationContext,
+): void {
+  currentContext = context;
+}
+
+
+export function getContext():
+ApplicationContext {
+
+  if (!currentContext) {
+    throw new Error(
+      'Application context not initialized',
+    );
+  }
+
+  return currentContext;
 }

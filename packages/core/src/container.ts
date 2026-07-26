@@ -2,9 +2,10 @@ import type {
   ServiceContainer,
 } from './interfaces.js';
 
+
 let container:
-  | ServiceContainer
-  | null = null;
+  ServiceContainer | undefined;
+
 
 export function setContainer(
   value: ServiceContainer,
@@ -12,12 +13,24 @@ export function setContainer(
   container = value;
 }
 
-export function getContainer(): ServiceContainer {
+
+export function getContainer():
+ServiceContainer {
+
   if (!container) {
     throw new Error(
-      'Service container has not been registered.',
+      'Container not initialized',
     );
   }
 
   return container;
+}
+
+
+export function resolve<T>(
+  token: string,
+): T {
+
+  return getContainer()
+    .resolve<T>(token);
 }

@@ -1,90 +1,32 @@
 import {
-  LifecycleManager,
-} from './lifecycle/index.js';
-
-import {
-  DefaultContainer,
-} from './providers/default/index.js';
+  RuntimeBuilder,
+} from './runtime/index.js';
 
 import {
   setContainer,
 } from './container.js';
 
 import {
-  AUTH_SERVICE,
-  CACHE_SERVICE,
-  CONFIG_SERVICE,
-  DATABASE_SERVICE,
-  EVENTS_SERVICE,
-  LOGGER_SERVICE,
-  NOTIFICATIONS_SERVICE,
-  SECURITY_SERVICE,
-  STORAGE_SERVICE,
-} from './services/index.js';
+  setContext,
+} from './context.js';
 
-export async function bootstrap(): Promise<void> {
-  const container = new DefaultContainer();
+export async function bootstrap() {
 
-  const lifecycle =
-    new LifecycleManager();
+  const runtime =
+    await new RuntimeBuilder()
+      .build();
 
-  container.register({
-    token: CONFIG_SERVICE,
-    implementation: {},
-    lifetime: 'singleton',
-  });
+  setContainer(
+    runtime.context.container,
+  );
 
-  container.register({
-    token: LOGGER_SERVICE,
-    implementation: {},
-    lifetime: 'singleton',
-  });
+  setContext(
+    runtime.context,
+  );
 
-  container.register({
-    token: EVENTS_SERVICE,
-    implementation: {},
-    lifetime: 'singleton',
-  });
+  await runtime.context.plugins.load(
+    runtime.context.container,
+  );
 
-  container.register({
-    token: CACHE_SERVICE,
-    implementation: {},
-    lifetime: 'singleton',
-  });
-
-  container.register({
-    token: DATABASE_SERVICE,
-    implementation: {},
-    lifetime: 'singleton',
-  });
-
-  container.register({
-    token: SECURITY_SERVICE,
-    implementation: {},
-    lifetime: 'singleton',
-  });
-
-  container.register({
-    token: STORAGE_SERVICE,
-    implementation: {},
-    lifetime: 'singleton',
-  });
-
-  container.register({
-    token: NOTIFICATIONS_SERVICE,
-    implementation: {},
-    lifetime: 'singleton',
-  });
-
-  container.register({
-    token: AUTH_SERVICE,
-    implementation: {},
-    lifetime: 'singleton',
-  });
-
-  setContainer(container);
-
-  // No lifecycle-aware services yet.
-  // Later milestones will register them here.
-  await lifecycle.start();
+  await runtime.context.lifecycle.start();
 }
