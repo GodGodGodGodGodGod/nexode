@@ -1,4 +1,8 @@
 import {
+  LifecycleManager,
+} from './lifecycle/index.js';
+
+import {
   DefaultContainer,
 } from './providers/default/index.js';
 
@@ -20,6 +24,9 @@ import {
 
 export async function bootstrap(): Promise<void> {
   const container = new DefaultContainer();
+
+  const lifecycle =
+    new LifecycleManager();
 
   container.register({
     token: CONFIG_SERVICE,
@@ -76,4 +83,8 @@ export async function bootstrap(): Promise<void> {
   });
 
   setContainer(container);
+
+  // No lifecycle-aware services yet.
+  // Later milestones will register them here.
+  await lifecycle.start();
 }
