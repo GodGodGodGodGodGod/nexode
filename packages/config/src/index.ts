@@ -16,3 +16,4 @@ export {
   ConfigurationError,
   ConfigurationValidationError,
 } from './errors.js';
+export * from './plugin/index.js';

@@ -60,7 +60,11 @@ importers:
 
   packages/cache: {}
 
-  packages/config: {}
+  packages/config:
+    dependencies:
+      '@nexode/core':
+        specifier: workspace:*
+        version: link:../core
 
   packages/core: {}
 
