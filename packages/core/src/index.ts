@@ -10,3 +10,4 @@ export * from './providers/default/index.js';
 export * from './services/index.js';
 export * from './factory/index.js';
 export * from './lifecycle/index.js';
+export * from './plugins/index.js';
