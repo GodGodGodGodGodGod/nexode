@@ -3,9 +3,9 @@ import type {
 } from '../interfaces.js';
 
 export interface CorePlugin {
-  readonly name: string;
+  name: string;
 
   register(
     container: ServiceContainer,
-  ): Promise<void> | void;
+  ): void;
 }

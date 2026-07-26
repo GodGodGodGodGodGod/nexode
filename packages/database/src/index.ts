@@ -7,3 +7,4 @@ export * from './types.js';
 export * from './errors.js';
 
 export * from './providers/memory/index.js';
+export * from './plugins/index.js';

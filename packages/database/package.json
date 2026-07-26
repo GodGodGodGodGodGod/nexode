@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "dependencies": {
+  "@nexode/core": "workspace:*"
+},
+"devDependencies": {
+
+  "@types/node": "^26.1.1"
+
+},
   "description": "Shared database abstractions for the NeXoDe platform.",
   "license": "UNLICENSED",
   "main": "./dist/index.js",

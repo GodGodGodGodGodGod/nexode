@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "description": "Shared caching abstractions for NeXoDe.",
   "type": "module",
+  "dependencies": {
+  "@nexode/core": "workspace:*"
+},
+"devDependencies": {
+
+  "@types/node": "^26.1.1"
+
+},
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

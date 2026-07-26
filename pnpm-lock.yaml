@@ -58,7 +58,15 @@ importers:
         specifier: ^4.1.5
         version: 4.4.3
 
-  packages/cache: {}
+  packages/cache:
+    dependencies:
+      '@nexode/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      '@types/node':
+        specifier: ^26.1.1
+        version: 26.1.1
 
   packages/config:
     dependencies:
@@ -68,7 +76,15 @@ importers:
 
   packages/core: {}
 
-  packages/database: {}
+  packages/database:
+    dependencies:
+      '@nexode/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      '@types/node':
+        specifier: ^26.1.1
+        version: 26.1.1
 
   packages/errors: {}
 
@@ -84,7 +100,15 @@ importers:
 
   packages/security: {}
 
-  packages/storage: {}
+  packages/storage:
+    dependencies:
+      '@nexode/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      '@types/node':
+        specifier: ^26.1.1
+        version: 26.1.1
 
   packages/testing: {}
 
