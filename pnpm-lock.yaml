@@ -74,7 +74,11 @@ importers:
 
   packages/events: {}
 
-  packages/logger: {}
+  packages/logger:
+    dependencies:
+      '@nexode/core':
+        specifier: workspace:*
+        version: link:../core
 
   packages/notifications: {}
 
