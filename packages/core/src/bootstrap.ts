@@ -1,32 +1,11 @@
-import {
-  RuntimeBuilder,
-} from './runtime/index.js';
+/**
+ * @deprecated
+ * Runtime composition now lives in @nexode/runtime.
+ * Import bootstrap() from @nexode/runtime instead.
+ */
 
-import {
-  setContainer,
-} from './container.js';
-
-import {
-  setContext,
-} from './context.js';
-
-export async function bootstrap() {
-
-  const runtime =
-    await new RuntimeBuilder()
-      .build();
-
-  setContainer(
-    runtime.context.container,
+export async function bootstrap(): Promise<never> {
+  throw new Error(
+    'bootstrap() has moved to @nexode/runtime.',
   );
-
-  setContext(
-    runtime.context,
-  );
-
-  await runtime.context.plugins.load(
-    runtime.context.container,
-  );
-
-  await runtime.context.lifecycle.start();
 }

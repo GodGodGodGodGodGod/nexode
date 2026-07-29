@@ -3,7 +3,7 @@ import type {
 } from '../interfaces.js';
 
 export interface CorePlugin {
-  name: string;
+  readonly name: string;
 
   register(
     container: ServiceContainer,

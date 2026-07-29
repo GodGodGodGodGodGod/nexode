@@ -12,6 +12,7 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
+    
   },
   "files": [
     "dist"
@@ -21,5 +22,5 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts",
     "test": "echo \"No tests yet\""
-  }
+}
 }

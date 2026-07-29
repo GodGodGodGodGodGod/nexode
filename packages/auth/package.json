@@ -20,8 +20,10 @@
     "lint": "eslint src --ext .ts",
     "test": "echo \"No tests yet\""
   },
-  "dependencies": {
-    "jose": "^6.2.4",
-    "zod": "^4.1.5"
-  }
+  
+"dependencies": {
+  "@nexode/core": "workspace:*",
+  "jose": "^6.2.4",
+  "zod": "^4.1.5"
+}
 }

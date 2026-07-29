@@ -1,0 +1,37 @@
+{
+  "name": "@nexode/runtime",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Runtime composition root for the NeXoDe platform.",
+  "license": "UNLICENSED",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@nexode/auth": "workspace:*",
+    "@nexode/cache": "workspace:*",
+    "@nexode/config": "workspace:*",
+    "@nexode/core": "workspace:*",
+    "@nexode/database": "workspace:*",
+    "@nexode/events": "workspace:*",
+    "@nexode/logger": "workspace:*",
+    "@nexode/notifications": "workspace:*",
+    "@nexode/security": "workspace:*",
+    "@nexode/storage": "workspace:*"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "test": "echo \"No tests yet\""
+  }
+}

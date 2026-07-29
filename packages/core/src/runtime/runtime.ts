@@ -1,6 +1,4 @@
-import type {
-  ApplicationContext,
-} from '../context/index.js';
+import type { ApplicationContext } from '../context/index.js';
 
 export class Runtime {
   constructor(

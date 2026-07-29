@@ -49,8 +49,17 @@ importers:
         specifier: ^8.65.0
         version: 8.65.0(eslint@9.39.5(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
 
+  packages/api-gateway:
+    dependencies:
+      '@nexode/core':
+        specifier: workspace:*
+        version: link:../core
+
   packages/auth:
     dependencies:
+      '@nexode/core':
+        specifier: workspace:*
+        version: link:../core
       jose:
         specifier: ^6.2.4
         version: 6.2.4
@@ -88,7 +97,11 @@ importers:
 
   packages/errors: {}
 
-  packages/events: {}
+  packages/events:
+    dependencies:
+      '@nexode/core':
+        specifier: workspace:*
+        version: link:../core
 
   packages/logger:
     dependencies:
@@ -96,9 +109,50 @@ importers:
         specifier: workspace:*
         version: link:../core
 
-  packages/notifications: {}
+  packages/notifications:
+    dependencies:
+      '@nexode/core':
+        specifier: workspace:*
+        version: link:../core
 
-  packages/security: {}
+  packages/runtime:
+    dependencies:
+      '@nexode/auth':
+        specifier: workspace:*
+        version: link:../auth
+      '@nexode/cache':
+        specifier: workspace:*
+        version: link:../cache
+      '@nexode/config':
+        specifier: workspace:*
+        version: link:../config
+      '@nexode/core':
+        specifier: workspace:*
+        version: link:../core
+      '@nexode/database':
+        specifier: workspace:*
+        version: link:../database
+      '@nexode/events':
+        specifier: workspace:*
+        version: link:../events
+      '@nexode/logger':
+        specifier: workspace:*
+        version: link:../logger
+      '@nexode/notifications':
+        specifier: workspace:*
+        version: link:../notifications
+      '@nexode/security':
+        specifier: workspace:*
+        version: link:../security
+      '@nexode/storage':
+        specifier: workspace:*
+        version: link:../storage
+
+  packages/security:
+    dependencies:
+      '@nexode/core':
+        specifier: workspace:*
+        version: link:../core
 
   packages/storage:
     dependencies:

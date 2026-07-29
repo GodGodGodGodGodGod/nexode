@@ -1,35 +1,29 @@
 import type {
+  CorePlugin,
+} from './plugin.js';
+
+import type {
   ServiceContainer,
 } from '../interfaces.js';
 
-import {
-  PluginRegistry,
-} from './pluginRegistry.js';
-
 export class PluginManager {
-  private readonly registry =
-    new PluginRegistry();
+  private readonly plugins: CorePlugin[] = [];
 
   register(
-    plugin: Parameters<
-      PluginRegistry['register']
-    >[0],
+    plugin: CorePlugin,
   ): void {
-    this.registry.register(
-      plugin,
-    );
+    this.plugins.push(plugin);
   }
 
-  async load(
+  load(
     container: ServiceContainer,
-  ): Promise<void> {
-    for (
-      const plugin of
-      this.registry.getAll()
-    ) {
-      await plugin.register(
-        container,
-      );
+  ): void {
+    for (const plugin of this.plugins) {
+      plugin.register(container);
     }
+  }
+
+  getPlugins(): readonly CorePlugin[] {
+    return this.plugins;
   }
 }
