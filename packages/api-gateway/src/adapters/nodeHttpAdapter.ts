@@ -16,6 +16,13 @@ import type {
 import { URL } from 'node:url';
 import { readRequestBody } from '../utils/readRequestBody.js';
 
+import {
+  createRequestId,
+} from '../logging/requestId.js';
+import {
+  createCorrelationId,
+} from '../logging/correlationId.js';
+
 export class NodeHttpAdapter implements HttpAdapter {
   private server?: Server;
 
@@ -84,6 +91,12 @@ const body =
   await readRequestBody(request);
 
 const gatewayRequest: GatewayRequest = {
+  
+  requestId: createRequestId(),
+  
+  correlationId:
+  createCorrelationId(),
+  
   method: request.method ?? 'GET',
 
   path: url.pathname,

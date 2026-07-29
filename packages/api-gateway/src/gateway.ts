@@ -41,6 +41,39 @@ import {
   AuthorizationError,
 } from './auth/index.js';
 
+import {
+  FixedWindowLimiter,
+  MemoryRateLimitStore,
+  RateLimitError,
+} from './rate-limit/index.js';
+
+import {
+  SecurityMiddleware,
+  CorsMiddleware,
+  defaultSecurityConfig,
+} from './security/index.js';
+
+import {
+  DefaultHealthProvider,
+  HealthController,
+} from './health/index.js';
+
+import type {
+  GatewayConfig,
+} from './config/index.js';
+
+import {
+  defaultGatewayConfig,
+} from './config/index.js';
+
+import {
+  InMemoryMetricsCollector,
+  MetricsMiddleware,
+} from './metrics/index.js';
+import {
+  LifecycleManager,
+} from './lifecycle/index.js';
+
 export class ApiGateway {
   readonly routes = new RouteRegistry();
 
@@ -54,16 +87,83 @@ export class ApiGateway {
   readonly plugins =
     new GatewayPluginManager();
 
-  constructor(
-    private readonly adapter: HttpAdapter,
-  ) {}
+    private readonly lifecycle =
+  new LifecycleManager();
 
-  initialize(): void {
+    private readonly metrics =
+  new InMemoryMetricsCollector();
+
+  private readonly health: HealthController;
+  
+    readonly rateLimiter =
+  new FixedWindowLimiter(
+    new MemoryRateLimitStore(),
+  );
+  private readonly security =
+  defaultSecurityConfig;
+
+  constructor(
+  private readonly adapter: HttpAdapter,
+
+  private readonly config: GatewayConfig =
+    defaultGatewayConfig,
+) {
+  this.health =
+    new HealthController(
+      new DefaultHealthProvider(
+        this.config.serviceName,
+        this.config.version,
+      ),
+    );
+}
+
+  async initialize(): Promise<void> {
+    await this.lifecycle.initialize();
+
+    this.middleware.use(
+  new SecurityMiddleware(),
+);
+
+this.middleware.use(
+  new CorsMiddleware(
+    this.security.cors!,
+  ),
+);
     this.plugins.load(
       this.routes,
       this.middleware,
     );
+    this.middleware.use(
+  new MetricsMiddleware(
+    this.metrics,
+  ),
+);
+this.routes.register({
+  method: 'GET',
+  path: '/health',
+  handler:
+    this.health.health.bind(
+      this.health,
+    ),
+});
 
+this.routes.register({
+  method: 'GET',
+  path: '/live',
+  handler:
+    this.health.live.bind(
+      this.health,
+    ),
+});
+
+this.routes.register({
+  method: 'GET',
+  path: '/ready',
+  handler:
+    this.health.ready.bind(
+      this.health,
+    ),
+});
     this.adapter.onRequest(
       this.handleRequest.bind(this),
     );
@@ -118,6 +218,28 @@ export class ApiGateway {
         routedRequest,
         match.route.schema,
       );
+
+      if (match.route.rateLimit) {
+  const result =
+    await this.rateLimiter.limit(
+      routedRequest,
+      match.route.rateLimit,
+    );
+
+  response.header(
+    'X-RateLimit-Remaining',
+    result.remaining.toString(),
+  );
+
+  response.header(
+    'X-RateLimit-Reset',
+    result.resetAt.toISOString(),
+  );
+
+  if (!result.allowed) {
+    throw new RateLimitError();
+  }
+}
 
       let finalRequest: GatewayRequest =
         routedRequest;
@@ -219,14 +341,16 @@ export class ApiGateway {
   }
 
   async start(
-    port: number,
+    port = this.config.port
   ): Promise<void> {
+    await this.lifecycle.start();
     await this.adapter.listen(
       port,
     );
   }
 
   async stop(): Promise<void> {
+    await this.lifecycle.stop();
     await this.adapter.close();
   }
 }

@@ -23,6 +23,10 @@ import type {
   AuthStrategy,
 } from '../auth/index.js';
 
+import type {
+  RateLimitOptions,
+} from '../rate-limit/index.js';
+
 export interface RouteOptions {
 
   readonly metadata?: RouteMetadata;
@@ -36,6 +40,8 @@ export interface RouteOptions {
   readonly roles?: readonly string[];
 
   readonly permissions?: readonly string[];
+ 
+  readonly rateLimit?: RateLimitOptions;
 }
 
 export class RouteGroup {
@@ -58,6 +64,7 @@ export class RouteGroup {
       schema: options.schema,
       auth: options.auth,
       roles: options.roles,
+      rateLimit: options.rateLimit,
       permissions: options.permissions,
     });
   }
@@ -75,6 +82,7 @@ export class RouteGroup {
       middleware: options.middleware,
       schema: options.schema,
       auth: options.auth,
+      rateLimit: options.rateLimit,
       roles: options.roles,
       permissions: options.permissions,
     });
@@ -92,6 +100,7 @@ export class RouteGroup {
       metadata: options.metadata,
       middleware: options.middleware,
       schema: options.schema,
+      rateLimit: options.rateLimit,
       auth: options.auth,
       roles: options.roles,
       permissions: options.permissions,
@@ -112,6 +121,7 @@ export class RouteGroup {
       schema: options.schema,
       auth: options.auth,
       roles: options.roles,
+      rateLimit: options.rateLimit,
       permissions: options.permissions,
     });
   }
@@ -130,6 +140,7 @@ export class RouteGroup {
       schema: options.schema,
       auth: options.auth,
       roles: options.roles,
+      rateLimit: options.rateLimit,
       permissions: options.permissions,
     });
   }

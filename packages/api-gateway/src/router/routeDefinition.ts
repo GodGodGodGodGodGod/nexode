@@ -18,6 +18,10 @@ import type {
   AuthStrategy,
 } from '../auth/index.js';
 
+import type {
+  RateLimitOptions,
+} from '../rate-limit/index.js';
+
 export interface RouteDefinition {
   readonly method: string;
 
@@ -36,4 +40,6 @@ export interface RouteDefinition {
   readonly roles?: readonly string[];
 
   readonly permissions?: readonly string[];
+
+  readonly rateLimit?: RateLimitOptions;
 }

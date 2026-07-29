@@ -9,6 +9,10 @@ export interface GatewayRequest {
 
   readonly headers: Record<string, string>;
 
+  readonly requestId?: string;
+
+  readonly correlationId?: string;
+  
   readonly params: Record<string, string>;
 
   readonly query: Record<string, string>;
