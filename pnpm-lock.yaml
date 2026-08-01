@@ -120,6 +120,8 @@ importers:
         specifier: workspace:*
         version: link:../core
 
+  packages/provider-registry: {}
+
   packages/runtime:
     dependencies:
       '@nexode/auth':

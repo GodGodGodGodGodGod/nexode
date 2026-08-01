@@ -16,4 +16,6 @@ export interface IdentityUser {
   readonly updatedAt: Date;
 
   readonly enabled: boolean;
+
+  readonly passwordHash: string;
 }
