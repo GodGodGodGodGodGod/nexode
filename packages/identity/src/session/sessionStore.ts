@@ -11,6 +11,10 @@ export interface SessionStore {
     id: string,
   ): Promise<IdentitySession | undefined>;
 
+  findByUser(
+  userId: string,
+): Promise<readonly IdentitySession[]>;
+
   update(
     session: IdentitySession,
   ): Promise<void>;

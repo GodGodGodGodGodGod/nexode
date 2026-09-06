@@ -11,3 +11,8 @@ export * from './risk/index.js';
 export * from './events/index.js';
 export * from './policy/index.js';
 export * from './authorization/index.js';
+
+export * from './mfa/mfaSecret.js';
+export * from './mfa/mfaStore.js';
+export * from './mfa/memoryMfaStore.js';
+export * from './mfa/index.js';

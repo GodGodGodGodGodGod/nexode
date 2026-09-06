@@ -15,7 +15,6 @@ export class MemoryTotpStore
   async save(
     secret: TotpSecret,
   ): Promise<void> {
-
     this.secrets.set(
       secret.userId,
       secret,
@@ -27,8 +26,15 @@ export class MemoryTotpStore
   ): Promise<
     TotpSecret | undefined
   > {
-
     return this.secrets.get(
+      userId,
+    );
+  }
+
+  async deleteByUserId(
+    userId: string,
+  ): Promise<void> {
+    this.secrets.delete(
       userId,
     );
   }

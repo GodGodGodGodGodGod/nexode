@@ -17,5 +17,7 @@ export interface IdentityUser {
 
   readonly enabled: boolean;
 
+  readonly emailVerified: boolean;
+
   readonly passwordHash: string;
 }

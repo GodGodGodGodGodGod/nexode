@@ -12,4 +12,6 @@ export interface AuthenticationResult {
   readonly authenticated: boolean;
 
   readonly user?: AuthUser;
+
+  readonly sessionId?: string;
 }

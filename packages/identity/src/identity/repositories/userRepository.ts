@@ -11,7 +11,15 @@ export interface UserRepository {
     email: string,
   ): Promise<IdentityUser | undefined>;
 
+  findByUsername(
+  username: string,
+): Promise<IdentityUser | undefined>;
+
   save(
     user: IdentityUser,
   ): Promise<void>;
+
+delete(
+  id: string,
+): Promise<void>;
 }

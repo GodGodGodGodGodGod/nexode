@@ -5,3 +5,5 @@ export * from './mfaManager.js';
 export * from './totp/index.js';
 export * from './recovery/index.js';
 export * from './passkey/index.js';
+export * from './login/mfaLoginChallenge.js';
+export * from './login/memoryMfaLoginChallengeStore.js';

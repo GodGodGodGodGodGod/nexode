@@ -12,4 +12,6 @@ export interface IdentitySession {
   readonly ipAddress?: string;
 
   readonly userAgent?: string;
+
+  readonly deviceName?: string;
 }

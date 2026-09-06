@@ -10,4 +10,8 @@ export interface TotpStore {
   findByUserId(
     userId: string,
   ): Promise<TotpSecret | undefined>;
+
+  deleteByUserId(
+    userId: string,
+  ): Promise<void>;
 }

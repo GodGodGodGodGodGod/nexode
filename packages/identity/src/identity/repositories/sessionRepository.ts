@@ -7,6 +7,12 @@ export interface SessionRepository {
     id: string,
   ): Promise<IdentitySession | undefined>;
 
+  findByUserId(
+    userId: string,
+  ): Promise<
+    readonly IdentitySession[]
+  >;
+
   save(
     session: IdentitySession,
   ): Promise<void>;

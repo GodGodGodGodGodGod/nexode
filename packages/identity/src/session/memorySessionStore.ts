@@ -29,6 +29,19 @@ export class MemorySessionStore
     return this.sessions.get(id);
   }
 
+  async findByUser(
+  userId: string,
+): Promise<
+  readonly IdentitySession[]
+> {
+  return [
+    ...this.sessions.values(),
+  ].filter(
+    (session) =>
+      session.userId === userId,
+  );
+}
+
   async update(
     session: IdentitySession,
   ): Promise<void> {

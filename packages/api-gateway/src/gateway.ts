@@ -94,7 +94,7 @@ export class ApiGateway {
   new InMemoryMetricsCollector();
 
   private readonly health: HealthController;
-  
+
     readonly rateLimiter =
   new FixedWindowLimiter(
     new MemoryRateLimitStore(),
@@ -260,6 +260,8 @@ this.routes.register({
         finalRequest = {
           ...routedRequest,
           user: result.user,
+          sessionId: result.sessionId,
+
         };
 
         if (match.route.roles) {

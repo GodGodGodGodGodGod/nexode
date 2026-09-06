@@ -9,10 +9,12 @@ export interface GatewayRequest {
 
   readonly headers: Record<string, string>;
 
+  readonly ipAddress?: string;
+
   readonly requestId?: string;
 
   readonly correlationId?: string;
-  
+
   readonly params: Record<string, string>;
 
   readonly query: Record<string, string>;
@@ -20,6 +22,8 @@ export interface GatewayRequest {
   readonly body?: unknown;
 
   readonly user?: AuthUser;
+
+  readonly sessionId?: string;
 }
 
 export interface GatewayResponse {

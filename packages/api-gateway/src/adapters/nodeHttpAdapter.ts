@@ -91,12 +91,12 @@ const body =
   await readRequestBody(request);
 
 const gatewayRequest: GatewayRequest = {
-  
+
   requestId: createRequestId(),
-  
+
   correlationId:
   createCorrelationId(),
-  
+
   method: request.method ?? 'GET',
 
   path: url.pathname,
@@ -111,6 +111,9 @@ const gatewayRequest: GatewayRequest = {
         : value ?? '',
     ]),
   ),
+
+  ipAddress:
+  request.socket.remoteAddress,
 
   params: {},
 
